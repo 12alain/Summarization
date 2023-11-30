@@ -30,6 +30,33 @@ text_color = "white"
 
 
 config()
+# Centrer les boutons
+st.markdown(
+    """
+    <style>
+        .stButton > button {
+            display: block;
+            margin: 0 auto;
+            width: 200px ;
+            text-align: center;
+        }
+    
+      
+        .custom-text {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        st-emotion-cache-q8sbsg p {
+         word-break: break-word;
+         margin-bottom: 0px;
+         font-size: 20px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 if language=="fr":
     
@@ -43,7 +70,7 @@ elif language =="en":
     stopwords = nltk.corpus.stopwords.words('english')
 
 number_of_sentences_slider = st.slider("Number of sentences to summarize:", min_value=1, max_value=10, value=1)
-if st.button('TextRankSummarizer',type='primary'):
+if st.button('TextRankSummarizer',type='primary',key=1):
     # Importer le TextRankSummarizer
         from sumy.summarizers.text_rank import TextRankSummarizer
       
@@ -56,7 +83,7 @@ if st.button('TextRankSummarizer',type='primary'):
         for sentence in summary:
             text_summary += str(sentence)
         st.write(
-                f'<div style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
+                f'<div class="custom-text" style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
                 f"{text_summary} "
                 '</div>',
                 unsafe_allow_html=True
@@ -73,7 +100,7 @@ if  st.button('LexRankSummarizer',type="primary"):
     for sentence in summary:
         text_summary += str(sentence) + " "
     st.write(
-                f'<div style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
+                f'<div class="custom-text" style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
                 f"{text_summary} "
                 '</div>',
                 unsafe_allow_html=True
@@ -94,16 +121,18 @@ if st.button('LsaSummizer',type="primary"):
 
     # Afficher le summary
     st.write(
-                f'<div style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
+                f'<div class="custom-text" style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
                 f"{text_summary} "
                 '</div>',
                 unsafe_allow_html=True
             )   
 
 if st.button('Summarisation',type="primary"):
+    
+   
+    
      sentence_list = nltk.sent_tokenize(text)
-# Stopwords
-     #stopwords = nltk.corpus.stopwords.words('french')
+
 # Dictionnaire de fréquences des mots
      word_frequencies = {}
      for word in nltk.word_tokenize(text):
@@ -133,7 +162,7 @@ if st.button('Summarisation',type="primary"):
 # regrouper ensemble les phrases qui ont les poids les plus élévés
      summary = ' '.join(summary_sentences)
      st.write(
-                f'<div style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
+                f'<div class="custom-text" style="font-size: {font_size}; color: {text_color}; font-family: {font_family};">'
                 f"{summary} "
                 '</div>',
                 unsafe_allow_html=True

@@ -9,7 +9,8 @@ nltk.download('stopwords')
 
 def cleaning(article_text):
     
-   article_text = re.sub(r'[[\w]*]', ' ', article_text)
+   article_text = re.sub(r'\[[^\]]*\]', ' ', article_text)
+
    # Supprimer les chaines de \xa0, \u200c
    article_text = re.sub(r'\xa0|\u200c', ' ', article_text)
    # Remplacer les espaces multiples par l'espace simple
